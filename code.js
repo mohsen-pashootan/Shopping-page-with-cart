@@ -186,12 +186,12 @@ class Cart {
   }
 }
 
-class Cartitems {
-  constructor({ carttotalitems, cartcontent, carttotalprice }) {
-    (this.items = []),
-      (this.cartcontent = cartcontent),
-      (this.carttotalitems = carttotalitems),
-      (this.carttotalprice = carttotalprice);
+class CartItems {
+  constructor({ cartTotalItems, cartContent, cartTotalPrice }) {
+    this.items = [];
+    this.cartContent = cartContent;
+    this.cartTotalItems = cartTotalItems;
+    this.cartTotalPrice = cartTotalPrice;
   }
 
   add(id) {
@@ -223,19 +223,15 @@ class Cartitems {
   remove(id) {
     this.items = this.items.filter((t) => t.product.id !== id);
     this.make();
-    // const index = this.items.findIndex((t) => t.id === id);
-    // if (index !== -1) {
-    //   this.items.splice(index, 1);
-    // }
-    // this.make();
   }
+
   clear() {
     this.items.splice(0, this.items.length);
     this.make();
   }
 
   make() {
-    cartcontent.innerHTML = "";
+    cartContent.innerHTML = "";
     let sum = 0,
       counter = 0;
     this.items.forEach((item) => {
@@ -243,15 +239,15 @@ class Cartitems {
       counter += item.counter;
       item.draw();
     });
-    carttotalitems.textContent = counter;
-    carttotalprice.textContent = sum;
+    cartTotalItems.textContent = counter;
+    cartTotalPrice.textContent = sum;
   }
 }
-const carttotalitems = document.querySelector(".cart-items");
-const cartcontent = document.querySelector(".cart-content");
-const carttotalprice = document.querySelector(".cart-total");
+const cartTotalItems = document.querySelector(".cart-items");
+const cartContent = document.querySelector(".cart-content");
+const cartTotalPrice = document.querySelector(".cart-total");
 
-const cart = new Cartitems({ carttotalitems, cartcontent, carttotalprice });
+const cart = new CartItems({ cartTotalItems, cartContent, cartTotalPrice });
 // console.log(cart);
 
 const openCart = document.querySelector(".cart-btn");
